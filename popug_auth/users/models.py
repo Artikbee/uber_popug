@@ -6,11 +6,18 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 
+ROLE_CHOICES = {
+    'admin': 'admin',
+    'popug': 'popug',
+    'top manager': 'top manager',
+
+}
+
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=30, blank=True)
     email = models.EmailField(unique=True)
-    role = models.CharField(max_length=30)
+    role = models.CharField(max_length=30,choices=ROLE_CHOICES)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
