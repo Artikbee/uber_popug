@@ -1,3 +1,4 @@
+from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
 from .models import CustomUser
@@ -18,3 +19,11 @@ class RegisterSerializer(serializers.ModelSerializer):
             'password',
             'role',
         ]
+
+    def validate_password(self, value):
+        validate_password(value)
+        return value
+
+    def create(self, validated_data):
+        user = CustomUser.objects.create_user(**validated_data)
+        return user

@@ -25,14 +25,14 @@ class CustomMeView(UserViewSet):
 
 
 class RegistrationView(APIView):
-    serializer_class = RegisterSerializer
     permission_classes = [AllowAny]
+    serializer_class = RegisterSerializer
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            #publish("user_created", serializer.data)
+            # publish("user_created", serializer.data)
             return Response(status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
