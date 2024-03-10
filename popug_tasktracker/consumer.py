@@ -18,8 +18,8 @@ def callback(ch, method, properties, body):
     print('Received in task')
     data = json.loads(body)
     CustomUser.objects.create(
-        name=data[0],
-        role=data[1]
+        name=data['name'],
+        role=data['role']
     )
     print(body)
 

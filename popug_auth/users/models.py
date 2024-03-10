@@ -15,9 +15,10 @@ ROLE_CHOICES = {
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    # public_id = models.CharField(max_length=30)
     name = models.CharField(max_length=30, blank=True)
     email = models.EmailField(unique=True)
-    role = models.CharField(max_length=30,choices=ROLE_CHOICES)
+    role = models.CharField(max_length=30, choices=ROLE_CHOICES)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
