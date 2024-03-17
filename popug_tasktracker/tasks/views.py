@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from .producer import publish
+#from .producer import publish
 from .serializers import TaskSerializer
 from .models import Task, CustomUser
 from random import choice
@@ -17,7 +17,7 @@ class TaskView(APIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            publish("task.created", serializer.data)
+            #publish("task.created", serializer.data)
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

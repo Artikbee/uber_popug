@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from .managers import CustomUserManager
 
@@ -15,7 +17,12 @@ ROLE_CHOICES = {
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    public_id = models.UUIDField(unique=True)
+
+    public_id = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True)
+
     name = models.CharField(max_length=30, blank=True)
     email = models.EmailField(unique=True)
     role = models.CharField(max_length=30, choices=ROLE_CHOICES)

@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 
 
@@ -7,7 +9,10 @@ class TaskStatus(models.TextChoices):
 
 
 class CustomUser(models.Model):
-    public_id = models.IntegerField()
+    public_id = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True)
     name = models.CharField(max_length=30)
     role = models.CharField(max_length=30)
     email = models.EmailField()
