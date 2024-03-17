@@ -14,15 +14,15 @@ class TransactionType(models.TextChoices):
 
 
 class CustomUser(models.Model):
-    # public_id = models.IntegerField()
-    email = models.EmailField()
+    public_id = models.UUIDField(unique=True)
     name = models.CharField(max_length=30)
     role = models.CharField(max_length=30)
+    email = models.EmailField()
     balance = models.IntegerField(default=0)
 
 
 class Task(models.Model):
-    #public_id = models.IntegerField()
+    # public_id = models.IntegerField()
     title = models.CharField(max_length=30)
     description = models.TextField()
     cost = models.IntegerField()

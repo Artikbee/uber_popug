@@ -10,8 +10,6 @@ from uuid import uuid1
 
 from .serializers import RegisterSerializer
 
-from .producer import publish
-
 
 class CustomMeView(UserViewSet):
     @action(["get", "put", "patch", "delete"], detail=False)
@@ -32,12 +30,9 @@ class RegistrationView(APIView):
     serializer_class = RegisterSerializer
 
     def post(self, request, *args, **kwargs):
-        #public_id = uuid.uuid1()
-        #print(public_id)
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            publish("user_created", serializer.data)
             return Response(status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)

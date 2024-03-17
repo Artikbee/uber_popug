@@ -15,7 +15,7 @@ ROLE_CHOICES = {
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    # public_id = models.CharField(max_length=30)
+    public_id = models.UUIDField(unique=True)
     name = models.CharField(max_length=30, blank=True)
     email = models.EmailField(unique=True)
     role = models.CharField(max_length=30, choices=ROLE_CHOICES)

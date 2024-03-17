@@ -7,8 +7,10 @@ class TaskStatus(models.TextChoices):
 
 
 class CustomUser(models.Model):
-    name = models.CharField(max_length=60)
-    role = models.CharField(max_length=60)
+    public_id = models.IntegerField()
+    name = models.CharField(max_length=30)
+    role = models.CharField(max_length=30)
+    email = models.EmailField()
 
 
 class Task(models.Model):
